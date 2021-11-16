@@ -19,4 +19,13 @@ class Types::MutationType < Types::BaseObject
   def create_author(author:)
     Author.create author.to_h #to_h to conform with rails conventions
   end
+
+  field :update_author, Boolean, null: false, description: 'Update an author' do
+    argument :author, Types::AuthorInputType, required: true
+  end
+
+  def update_author(author:)
+    existing = Author.where(id: author[:id]).first
+    existing&.update author.to_h
+  end
 end
