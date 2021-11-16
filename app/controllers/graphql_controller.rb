@@ -7,7 +7,8 @@ class GraphqlController < ApplicationController
     session = Session.where(key: request.headers['Authorization']).first
     Rails.logger.info "logged in as #{session&.user&.email}"
     context = {
-      current_user: session&.user
+      current_user: session&.user,
+      session_id: session&.id
     }
     result = BookshelfSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
