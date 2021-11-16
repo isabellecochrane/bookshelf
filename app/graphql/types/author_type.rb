@@ -1,3 +1,13 @@
+class Types::AuthorInputType < GraphQL::Schema::InputObject
+    graphql_name "AuthorInputType" #name by which it is seen in FE
+    description "all attrributes for creating an author"
+
+    argument :first_name, String, required: false
+    argument :last_name, String, required: false
+    argument :yob, Integer, required: false
+    argument :is_alive, Boolean, required: false
+end
+
 class Types::AuthorType < Types::BaseObject
     description "an author"
 
